@@ -23,7 +23,7 @@ bg_color = np.mean(img[0:100, 0:100], axis=(0, 1))
 dist = np.linalg.norm(img - bg_color, axis=2)
 
 # far from background = piece
-T = 25
+T = 190
 piece_mask = (dist > T).astype(np.uint8) * 255
 cv2.imshow("Piece mask", piece_mask)
 
@@ -35,7 +35,7 @@ closed = cv2.morphologyEx(piece_mask, cv2.MORPH_CLOSE, kernel)
 # open: remove small specks in the background
 small_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
 clean_mask = cv2.morphologyEx(closed, cv2.MORPH_OPEN, small_kernel)
-cv2.imshow("Clean mask", clean_mask)
+# cv2.imshow("Clean mask", clean_mask)
 
 # find contours
 contours, _ = cv2.findContours(clean_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
