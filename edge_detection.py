@@ -1,8 +1,14 @@
+import sys
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread("./real.png")
+# image path from the terminal: python edge_detection.py <image_path>
+if len(sys.argv) != 2:
+    sys.exit("usage: python edge_detection.py <image_path>")
+img = cv2.imread(sys.argv[1])
+if img is None:
+    sys.exit(f"could not read image: {sys.argv[1]}")
 # cv2.imshow("Original Image", img)
 
 # color masking
